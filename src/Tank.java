@@ -21,7 +21,7 @@ public class Tank {
 		g.setColor(c);
 	}
 	
-	public static void main(String[] args) {
+	public void move(){
 		
 	}
 }

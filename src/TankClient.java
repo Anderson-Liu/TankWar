@@ -18,11 +18,26 @@ public class TankClient extends Frame{
 				System.exit(0);
 			}
 		});
+		this.addKeyListener(new KeyMonitor());
 	}
 	
 	@Override
 	public void paint(Graphics g) {
 		tc.draw(g);
+	}
+	
+	private class KeyMonitor extends KeyAdapter{
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			tc.keyPress(e);
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			tc.keyReleased(e);
+		}
+		
 	}
 	
 	public static void main(String[] args) {

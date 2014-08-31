@@ -19,6 +19,7 @@ public class TankClient extends Frame{
 			}
 		});
 		this.addKeyListener(new KeyMonitor());
+		
 	}
 	
 	@Override

@@ -19,7 +19,7 @@ public class TankClient extends Frame{
 			}
 		});
 		this.addKeyListener(new KeyMonitor());
-		
+		new Thread(new PaintThread()).start();
 	}
 	
 	@Override
@@ -37,6 +37,22 @@ public class TankClient extends Frame{
 		@Override
 		public void keyReleased(KeyEvent e) {
 			tc.keyReleased(e);
+		}
+		
+	}
+	
+	private class PaintThread implements Runnable{
+
+		@Override
+		public void run() {
+			while(true){
+				try {
+					repaint();
+					Thread.sleep(30);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		
 	}

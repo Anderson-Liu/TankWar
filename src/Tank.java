@@ -24,8 +24,6 @@ public class Tank {
 		g.setColor(Color.RED);
 		g.fillOval(x, y, WIDTH, HEIGHT);
 		g.setColor(c);
-		
-		move();
 	}
 	
 	public void move(){
@@ -61,7 +59,7 @@ public class Tank {
 		case STOP :
 			break;		
 		}
-		 tcDir();
+		 
 	}
 	
 	public void tcDir(){
@@ -74,7 +72,7 @@ public class Tank {
 		else if(!bL && !bU && !bR && bD) dir = Direction.D; 
 		else if(bL && !bU && !bR && bD) dir = Direction.LD; 
 		else if(!bL && !bU && !bR && !bD) dir = Direction.STOP; 
-		
+		move();
 	}
 
 	public void keyPress(KeyEvent e) {

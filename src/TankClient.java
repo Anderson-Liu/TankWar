@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class TankClient extends Frame{
+	Tank tc = new Tank(50,50);
 	
 	public void launchFrame(){
 		this.setLocation(400, 300);
@@ -19,6 +20,10 @@ public class TankClient extends Frame{
 		});
 	}
 	
+	@Override
+	public void paint(Graphics g) {
+		tc.draw(g);
+	}
 	
 	public static void main(String[] args) {
 		new TankClient().launchFrame();

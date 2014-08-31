@@ -57,7 +57,6 @@ public class TankClient extends Frame{
 				}
 			}
 		}
-		
 	}
 	
 	public void update(Graphics g){

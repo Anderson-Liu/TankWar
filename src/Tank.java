@@ -25,9 +25,10 @@ public class Tank {
 		g.setColor(Color.RED);
 		g.fillOval(x, y, WIDTH, HEIGHT);
 		g.setColor(c);
-		switch(dir){
+		switch(ptDir){
 		case L :
 			g.drawLine(x + Tank.WIDTH/2, y + Tank.HEIGHT/2, x, y + Tank.HEIGHT);
+			break;
 		case LU :
 			g.drawLine(x + Tank.WIDTH/2, y + Tank.HEIGHT/2, x, y);
 			break;
@@ -85,10 +86,9 @@ public class Tank {
 		case STOP :
 			break;		
 		}
-		while (dir != Direction.STOP){
+		if (dir != Direction.STOP){
 			ptDir = dir;
-		}
-		 
+		} 
 	}
 	
 	public void tcDir(){
@@ -139,9 +139,5 @@ public class Tank {
 			bD = false;
 			break;	
 		}
-	}
-
-	public void ptDir(){
-		
 	}
 }

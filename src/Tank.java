@@ -11,13 +11,18 @@ public class Tank {
 	int x, y;
 	private boolean bL=false,bU=false,bR=false,bD=false;
 	enum Direction {L, LU, U, RU, R, RD, D, LD, STOP};
-	
 	private Direction dir = Direction.STOP;
 	private Direction ptDir = Direction.D;
+	TankClient tc = null;
 	
 	public Tank(int x,int y){
 		this.x = x;
 		this.y = y;
+	}
+	
+	public Tank(int x,int y,TankClient tc){
+		this(x,y);
+		this.tc = tc;
 	}
 	
 	public void draw(Graphics g){
@@ -89,6 +94,7 @@ public class Tank {
 		if (dir != Direction.STOP){
 			ptDir = dir;
 		} 
+		//ms.move();
 	}
 	
 	public void tcDir(){
@@ -102,6 +108,7 @@ public class Tank {
 		else if(bL && !bU && !bR && bD) dir = Direction.LD; 
 		else if(!bL && !bU && !bR && !bD) dir = Direction.STOP; 
 		move();
+
 	}
 
 	public void keyPress(KeyEvent e) {
@@ -126,6 +133,8 @@ public class Tank {
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 		switch (key){
+		case KeyEvent.VK_CONTROL:
+			fire();
 		case KeyEvent.VK_LEFT :
 			bL = false;
 			break;
@@ -140,4 +149,12 @@ public class Tank {
 			break;	
 		}
 	}
+
+	public Missile fire(){
+		int x = this.x + Tank.WIDTH/2 - Missile.WIDTH/2;
+		int y = this.y + Tank.HEIGHT/2 - Missile.HEIGHT/2;
+		Missile s = new Missile(x,y,ptDir,tc);
+		tc.msList.add(s);
+		return s;
+	} 
 }

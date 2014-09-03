@@ -1,11 +1,14 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TankClient extends Frame{
-	Tank MyTank = new Tank(50,50);
+	Tank MyTank = new Tank(50,50,this);
 	Image offScreenImage = null;
 	private final static int Game_wigth = 800;
 	private final static int Game_height = 600;
+	List<Missile> msList = new ArrayList<Missile>(); 
 	
 	public void launchFrame(){
 		this.setLocation(400, 300);
@@ -22,6 +25,11 @@ public class TankClient extends Frame{
 	@Override
 	public void paint(Graphics g) {
 		MyTank.draw(g);
+		for(int i=0; i<msList.size(); i++){
+			Missile m = msList.get(i);
+			if(!m.isLive())	msList.remove(m);
+			else m.draw(g);
+		}
 	}
 	
 	private class KeyMonitor extends KeyAdapter{

@@ -6,9 +6,9 @@ public class Missile {
 	private TankClient tc;
 	private static final int XSPEED = 10;
 	private static final int YSPEED = 10;
-	public static final int WIDTH = 20;
-	public static final int HEIGHT = 20;
-	private boolean live = true;
+	public static final int WIDTH = 10;
+	public static final int HEIGHT = 10;
+	public boolean live = true;
 
 	
 	public Missile(int x, int y, Tank.Direction dir){
@@ -27,6 +27,8 @@ public class Missile {
 		g.setColor(Color.BLUE);
 		g.fillOval(x, y, WIDTH, HEIGHT);
 		g.setColor(c);
+		
+		move();
 	}
 	
 	public void move(){
@@ -59,6 +61,11 @@ public class Missile {
 			x -= XSPEED;
 			y += YSPEED;
 			break;	
+		}	
+		
+		if (x < 0 || x > TankClient.Game_wigth || y < 0 || y > TankClient.Game_height ){
+			live = false;
+			tc.msList.remove(this);
 		}
 	}
 	

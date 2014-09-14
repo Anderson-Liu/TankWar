@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TankClient extends Frame{
-	Tank MyTank = new Tank(50,50,this);
+	Tank myTank = new Tank(50,80,this);
 	Image offScreenImage = null;
-	private final static int Game_wigth = 800;
-	private final static int Game_height = 600;
+	public final static int Game_wigth = 800;
+	public final static int Game_height = 600;
 	List<Missile> msList = new ArrayList<Missile>(); 
 	
 	public void launchFrame(){
@@ -24,7 +24,8 @@ public class TankClient extends Frame{
 	
 	@Override
 	public void paint(Graphics g) {
-		MyTank.draw(g);
+		g.drawString("missilescount: " + msList.size(), 40, 60);
+		myTank.draw(g);
 		for(int i=0; i<msList.size(); i++){
 			Missile m = msList.get(i);
 			if(!m.isLive())	msList.remove(m);
@@ -36,12 +37,12 @@ public class TankClient extends Frame{
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-			MyTank.keyPress(e);
+			myTank.keyPress(e);
 		}
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			MyTank.keyReleased(e);
+			myTank.keyReleased(e);
 		}
 		
 	}

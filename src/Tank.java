@@ -30,9 +30,10 @@ public class Tank {
 		g.setColor(Color.RED);
 		g.fillOval(x, y, WIDTH, HEIGHT);
 		g.setColor(c);
+move();
 		switch(ptDir){
 		case L :
-			g.drawLine(x + Tank.WIDTH/2, y + Tank.HEIGHT/2, x, y + Tank.HEIGHT);
+			g.drawLine(x + Tank.WIDTH/2, y + Tank.HEIGHT/2, x, y + Tank.HEIGHT/2);
 			break;
 		case LU :
 			g.drawLine(x + Tank.WIDTH/2, y + Tank.HEIGHT/2, x, y);
@@ -91,9 +92,7 @@ public class Tank {
 		case STOP :
 			break;		
 		}
-		if (dir != Direction.STOP){
-			ptDir = dir;
-		} 
+tcDir();
 		//ms.move();
 	}
 	
@@ -107,7 +106,10 @@ public class Tank {
 		else if(!bL && !bU && !bR && bD) dir = Direction.D; 
 		else if(bL && !bU && !bR && bD) dir = Direction.LD; 
 		else if(!bL && !bU && !bR && !bD) dir = Direction.STOP; 
-		move();
+		if (dir != Direction.STOP){
+			ptDir = dir;
+		} 
+//move();
 
 	}
 
@@ -127,7 +129,7 @@ public class Tank {
 			bD = true;
 			break;	
 		}
-		tcDir();
+//tcDir();
 	}
 
 	public void keyReleased(KeyEvent e) {
@@ -135,6 +137,7 @@ public class Tank {
 		switch (key){
 		case KeyEvent.VK_CONTROL:
 			fire();
+			break;	//少写break的话容易造成穿透；
 		case KeyEvent.VK_LEFT :
 			bL = false;
 			break;
@@ -148,6 +151,7 @@ public class Tank {
 			bD = false;
 			break;	
 		}
+//tcDir();
 	}
 
 	public Missile fire(){

@@ -92,6 +92,14 @@ move();
 		case STOP :
 			break;		
 		}
+		
+		if(x < 0) x = 0;    //左不出界
+		//if(x < 30) x = 30; 
+		if(y < 30) y = 30;  //上不出界
+		//if(y < 0) y = 0;
+		if(x + Tank.WIDTH > TankClient.Game_wigth) x = TankClient.Game_wigth - Tank.WIDTH;
+		if(y + Tank.HEIGHT > TankClient.Game_height) y = TankClient.Game_height - Tank.HEIGHT;
+		
 tcDir();
 		//ms.move();
 	}

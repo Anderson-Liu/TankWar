@@ -14,20 +14,26 @@ public class Tank {
 	private Direction dir = Direction.STOP;
 	private Direction ptDir = Direction.D;
 	TankClient tc = null;
+	private boolean good;
+	private boolean live = true;
 	
-	public Tank(int x,int y){
+	public Tank(int x,int y,boolean good){
 		this.x = x;
 		this.y = y;
+		this.good = good;
 	}
 	
-	public Tank(int x,int y,TankClient tc){
-		this(x,y);
+	public Tank(int x,int y,boolean good,TankClient tc){
+		this(x,y,good);
 		this.tc = tc;
 	}
 	
 	public void draw(Graphics g){
+		if(!live) return;
 		Color c = g.getColor();
-		g.setColor(Color.RED);
+		if(good)	g.setColor(Color.RED);
+		else	g.setColor(Color.BLUE);
+		
 		g.fillOval(x, y, WIDTH, HEIGHT);
 		g.setColor(c);
 move();
@@ -169,4 +175,16 @@ tcDir();
 		tc.msList.add(s);
 		return s;
 	} 
+
+	public Rectangle getRect(){
+		return new Rectangle(x,y,WIDTH,HEIGHT);
+	}
+
+	public boolean isLive() {
+		return live;
+	}
+
+	public void setLive(boolean live) {
+		this.live = live;
+	}
 }

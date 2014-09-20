@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TankClient extends Frame{
-	Tank myTank = new Tank(50,80,this);
+	Tank myTank = new Tank(50,80,true,this);
+	Tank enemyTank = new Tank(80,110,false,this);
 	Image offScreenImage = null;
 	public final static int Game_wigth = 800;
 	public final static int Game_height = 600;
 	List<Missile> msList = new ArrayList<Missile>(); 
+	//List<Tank> enmyList = new ArrayList<Tank>();
 	
 	public void launchFrame(){
 		this.setLocation(400, 300);
@@ -26,10 +28,12 @@ public class TankClient extends Frame{
 	public void paint(Graphics g) {
 		g.drawString("missilescount: " + msList.size(), 40, 60);
 		myTank.draw(g);
+		enemyTank.draw(g);
 		for(int i=0; i<msList.size(); i++){
 			Missile m = msList.get(i);
 			if(!m.isLive())	msList.remove(m);
 			else m.draw(g);
+			m.hitTank(enemyTank);
 		}
 	}
 	

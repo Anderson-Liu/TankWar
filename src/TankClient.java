@@ -42,7 +42,7 @@ public class TankClient extends Frame{
 			if(!m.isLive())	msList.remove(m);
 			else m.draw(g);
 			m.hitTanks(tanks);
-			
+			m.hitTank(myTank);
 		}
 		for(int i=0; i<explodes.size(); i++){
 			Explode e = explodes.get(i);

@@ -10,7 +10,7 @@ public class Missile {
 	public static final int WIDTH = 10;
 	public static final int HEIGHT = 10;
 	public boolean live = true;
-
+	private boolean good;
 	
 	public Missile(int x, int y, Tank.Direction dir){
 		this.x = x;
@@ -18,15 +18,20 @@ public class Missile {
 		this.dir = dir;
 	}
 	
-	public Missile(int x, int y, Tank.Direction dir,TankClient tc){
+	public Missile(int x, int y, boolean good,Tank.Direction dir,TankClient tc){
 		this(x,y,dir);
+		this.good = good;
 		this.tc = tc;
 	}
 	
 	public void draw(Graphics g){
 		if(!live) return;
 		Color c = g.getColor();
-		g.setColor(Color.BLUE);
+		if(good){
+			g.setColor(Color.RED);
+		}
+		else g.setColor(Color.BLACK);
+			
 		g.fillOval(x, y, WIDTH, HEIGHT);
 		g.setColor(c);
 		
@@ -80,7 +85,7 @@ public class Missile {
 	}
 	
 	public boolean hitTank(Tank t){
-		if(this.getRect().intersects(t.getRect()) && t.isLive()){
+		if(this.live && this.getRect().intersects(t.getRect()) && t.isLive() && this.good != t.isGood()){
 			t.setLive(false);
 			this.live = false;
 			Explode e = new Explode(x, y, tc);

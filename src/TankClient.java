@@ -4,15 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TankClient extends Frame{
-	Tank myTank = new Tank(50,80,true,this);
-	Tank enemyTank = new Tank(80,110,false,this);
+	Tank myTank = new Tank(50,90,true,this);
+	//Tank enemyTank = new Tank(80,110,false,this);
+	
 	Image offScreenImage = null;
 	public final static int Game_wigth = 800;
 	public final static int Game_height = 600;
 	List<Missile> msList = new ArrayList<Missile>(); 
-	//List<Tank> enmyList = new ArrayList<Tank>();
+	List<Explode> explodes = new ArrayList<Explode>();
+	List<Tank> tanks = new ArrayList<Tank>();
 	
 	public void launchFrame(){
+		for(int i=0; i<10; i++){
+			tanks.add(new Tank(50 + 40*(i+1), 90, false,this));
+		}
 		this.setLocation(400, 300);
 		this.setSize(Game_wigth, Game_height);
 		this.setVisible(true);
@@ -26,14 +31,29 @@ public class TankClient extends Frame{
 	
 	@Override
 	public void paint(Graphics g) {
-		g.drawString("missilescount: " + msList.size(), 40, 60);
+		g.drawString("missiles count: " + msList.size(), 40, 60);
+		g.drawString("explodes count: " + explodes.size(), 40, 70);
+		g.drawString("Tank count: " + tanks.size(), 40, 80);
 		myTank.draw(g);
-		enemyTank.draw(g);
+		//enemyTank.draw(g);
+		
 		for(int i=0; i<msList.size(); i++){
 			Missile m = msList.get(i);
 			if(!m.isLive())	msList.remove(m);
 			else m.draw(g);
-			m.hitTank(enemyTank);
+			m.hitTanks(tanks);
+			
+		}
+		for(int i=0; i<explodes.size(); i++){
+			Explode e = explodes.get(i);
+			if(!e.isLive())	explodes.remove(e);
+			//else e.draw(g);
+			e.draw(g);
+		}
+		for(int i=0; i<tanks.size(); i++){
+			Tank t = tanks.get(i);
+			t.draw(g);
+			
 		}
 	}
 	

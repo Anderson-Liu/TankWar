@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.*;
 
 
 public class Tank {
@@ -16,6 +17,7 @@ public class Tank {
 	TankClient tc = null;
 	private boolean good;
 	private boolean live = true;
+	private static Random r = new Random();
 	
 	public Tank(int x,int y,boolean good){
 		this.x = x;
@@ -23,8 +25,9 @@ public class Tank {
 		this.good = good;
 	}
 	
-	public Tank(int x,int y,boolean good,TankClient tc){
+	public Tank(int x,int y,boolean good,Direction dir,TankClient tc){
 		this(x,y,good);
+		this.dir = dir;
 		this.tc = tc;
 	}
 	
@@ -41,7 +44,7 @@ public class Tank {
 		
 		g.fillOval(x, y, WIDTH, HEIGHT);
 		g.setColor(c);
-move();
+		
 		switch(ptDir){
 		case L :
 			g.drawLine(x + Tank.WIDTH/2, y + Tank.HEIGHT/2, x, y + Tank.HEIGHT/2);
@@ -68,6 +71,7 @@ move();
 			g.drawLine(x + Tank.WIDTH/2, y + Tank.HEIGHT/2, x, y + Tank.HEIGHT);
 			break;	
 		}
+		move();
 	}
 	
 	public void move(){
@@ -111,8 +115,14 @@ move();
 		if(x + Tank.WIDTH > TankClient.Game_wigth) x = TankClient.Game_wigth - Tank.WIDTH;
 		if(y + Tank.HEIGHT > TankClient.Game_height) y = TankClient.Game_height - Tank.HEIGHT;
 		
-tcDir();
+		//tcDir(); 注释掉后 敌方坦克能够动起来了
 		//ms.move();
+		
+		if(!good){
+			Direction[] dirs = Direction.values();
+			int rn = r.nextInt(dirs.length);
+			dir = dirs[rn];
+		}
 	}
 	
 	public void tcDir(){
@@ -148,7 +158,7 @@ tcDir();
 			bD = true;
 			break;	
 		}
-//tcDir();
+		tcDir();	//修改处，修改后，敌方坦克到达底部后，我方坦克也不会动弹不得；
 	}
 
 	public void keyReleased(KeyEvent e) {

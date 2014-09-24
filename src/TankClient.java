@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TankClient extends Frame{
-	Tank myTank = new Tank(50,90,true,this);
+	Tank myTank = new Tank(50,90,true,Tank.Direction.STOP,this);
 	//Tank enemyTank = new Tank(80,110,false,this);
 	
 	Image offScreenImage = null;
@@ -16,7 +16,7 @@ public class TankClient extends Frame{
 	
 	public void launchFrame(){
 		for(int i=0; i<10; i++){
-			tanks.add(new Tank(50 + 40*(i+1), 90, false,this));
+			tanks.add(new Tank(50 + 40*(i+1), 90, false,Tank.Direction.D,this));
 		}
 		this.setLocation(400, 300);
 		this.setSize(Game_wigth, Game_height);

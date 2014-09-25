@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TankClient extends Frame{
-	Tank myTank = new Tank(50,90,true,Tank.Direction.STOP,this);
+	Tank myTank = new Tank(500,500,true,Tank.Direction.STOP,this);
+	Wall w1 = new Wall(220, 150, 10, 250, this);
+	Wall w2 = new Wall(400, 200, 220, 10, this);
 	//Tank enemyTank = new Tank(80,110,false,this);
 	
 	Image offScreenImage = null;
@@ -35,6 +37,10 @@ public class TankClient extends Frame{
 		g.drawString("explodes count: " + explodes.size(), 40, 70);
 		g.drawString("Tank count: " + tanks.size(), 40, 80);
 		myTank.draw(g);
+		myTank.hitWall(w1);
+		myTank.hitWall(w2);
+		w1.draw(g);
+		w2.draw(g);
 		//enemyTank.draw(g);
 		
 		for(int i=0; i<msList.size(); i++){
@@ -43,6 +49,8 @@ public class TankClient extends Frame{
 			else m.draw(g);
 			m.hitTanks(tanks);
 			m.hitTank(myTank);
+			m.hitWall(w1);
+			m.hitWall(w2);
 		}
 		for(int i=0; i<explodes.size(); i++){
 			Explode e = explodes.get(i);
@@ -53,7 +61,10 @@ public class TankClient extends Frame{
 		for(int i=0; i<tanks.size(); i++){
 			Tank t = tanks.get(i);
 			t.draw(g);
-			
+			t.hitWall(w1);
+			t.hitWall(w2);
+			t.hitEach(tanks);
+			//t.hitEach(t1);
 		}
 	}
 	

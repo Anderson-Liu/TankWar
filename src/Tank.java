@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.List;
 import java.awt.event.KeyEvent;
 import java.util.*;
 
@@ -10,6 +11,7 @@ public class Tank {
 	public static final int WIDTH = 30;
 	public static final int HEIGHT = 30;
 	int x, y;
+	private int oldX,oldY;
 	private boolean bL=false,bU=false,bR=false,bD=false;
 	enum Direction {L, LU, U, RU, R, RD, D, LD, STOP};
 	private Direction dir = Direction.STOP;
@@ -77,6 +79,8 @@ public class Tank {
 	}
 	
 	public void move(){
+		this.oldX = x;
+		this.oldY = y;
 		switch(dir){
 		case L :
 			x -= XSPEED;
@@ -126,6 +130,9 @@ public class Tank {
 				step = r.nextInt(12) + 3;
 				int rn = r.nextInt(dirs.length);
 				dir = dirs[rn];
+				if (dir != Direction.STOP){
+					ptDir = dir;
+				} 
 			}
 			step --;
 			if(r.nextInt(40) > 38){
@@ -219,5 +226,34 @@ public class Tank {
 
 	public void setGood(boolean good) {
 		this.good = good;
+	}
+	
+	public void stay(){
+		this.x = oldX;
+		this.y = oldY;
+	}
+	
+	public boolean hitWall(Wall w){
+		if(this.live && this.getRect().intersects(w.getRect())){
+			//this.dir = Direction.STOP;
+			this.stay();
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean hitEach(java.util.List<Tank> tanks){
+		for(int i=0; i<tanks.size(); i++){
+			Tank t = tanks.get(i);
+			if(this != t){
+				if(this.live && t.live && this.getRect().intersects(t.getRect())){
+					//this.dir = Direction.STOP;
+					this.stay();
+					t.stay();
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

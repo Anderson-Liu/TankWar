@@ -22,6 +22,7 @@ public class Tank {
 	private static Random r = new Random();
 	
 	private int step = r.nextInt(12) + 3;;
+	private int life = 100;
 	
 	public Tank(int x,int y,boolean good){
 		this.x = x;
@@ -274,5 +275,13 @@ public class Tank {
 		for(int i=0; i<8; i++){
 			tc.msList.add(fire(dirs[i]));
 		}
+	}
+
+	public int getLife() {
+		return life;
+	}
+
+	public void setLife(int life) {
+		this.life = life;
 	}
 }

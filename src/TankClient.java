@@ -7,7 +7,10 @@ public class TankClient extends Frame{
 	Tank myTank = new Tank(500,500,true,Tank.Direction.STOP,this);
 	Wall w1 = new Wall(220, 150, 10, 250, this);
 	Wall w2 = new Wall(400, 200, 220, 10, this);
+	Blood b = new Blood();
 	//Tank enemyTank = new Tank(80,110,false,this);
+	private static int time = 3;
+	private static int tankTime = 3;
 	
 	Image offScreenImage = null;
 	public final static int Game_wigth = 800;
@@ -38,10 +41,14 @@ public class TankClient extends Frame{
 		g.drawString("Tank count: " + tanks.size(), 40, 80);
 		g.drawString("Life count: " + myTank.getLife(), 40, 90);
 		myTank.draw(g);
+		myTank.eat(b);
 		myTank.hitWall(w1);
 		myTank.hitWall(w2);
 		w1.draw(g);
 		w2.draw(g);
+		if(b.isLive()){
+			b.draw(g);
+		}
 		//enemyTank.draw(g);
 		
 		for(int i=0; i<msList.size(); i++){
@@ -59,6 +66,7 @@ public class TankClient extends Frame{
 			//else e.draw(g);
 			e.draw(g);
 		}
+		
 		for(int i=0; i<tanks.size(); i++){
 			Tank t = tanks.get(i);
 			t.draw(g);
@@ -66,6 +74,23 @@ public class TankClient extends Frame{
 			t.hitWall(w2);
 			t.hitEach(tanks);
 			//t.hitEach(t1);
+		}
+		
+		if(tanks.size() <= 0){
+			if(time < 5){
+				time ++;
+				for(int i=0; i<time*5; i++){
+					tanks.add(new Tank(50 + 40*(i+1), 90, false,Tank.Direction.D,this));
+				}
+			}
+			
+		}
+		
+		if(!myTank.isLive()){
+			tankTime --;
+			if(tankTime >= 0){
+				myTank.setLive(false);
+			}
 		}
 	}
 	

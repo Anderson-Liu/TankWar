@@ -89,7 +89,7 @@ public class Missile {
 			if(t.isGood()){
 				t.setLife(t.getLife() - 20);
 				this.live = false;
-				if(t.getLife() <= 0) {
+				if(t.getLife() == 0) {
 					t.setLive(false);
 					this.live = false;
 					Explode e = new Explode(x, y, tc);

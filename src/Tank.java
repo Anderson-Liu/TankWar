@@ -24,6 +24,8 @@ public class Tank {
 	private int step = r.nextInt(12) + 3;;
 	private int life = 100;
 	
+	private BloodBar bb = new BloodBar();
+	
 	public Tank(int x,int y,boolean good){
 		this.x = x;
 		this.y = y;
@@ -37,6 +39,7 @@ public class Tank {
 	}
 	
 	public void draw(Graphics g){
+		if(good) bb.draw(g);
 		if(!live){
 			if(!isGood()){
 				tc.tanks.remove(this);
@@ -283,5 +286,16 @@ public class Tank {
 
 	public void setLife(int life) {
 		this.life = life;
+	}
+	
+	public class BloodBar{
+		public void draw(Graphics g){
+			Color c = g.getColor();
+			g.setColor(Color.RED);
+			g.drawRect(x, y-20, WIDTH, 10);
+			int w = WIDTH * life/100;
+			g.fillRect(x, y-20, w, 10);
+			g.setColor(c);
+		}
 	}
 }

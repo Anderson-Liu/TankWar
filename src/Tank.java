@@ -180,6 +180,9 @@ public class Tank {
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 		switch (key){
+		case KeyEvent.VK_A:
+			superFire();
+			break;
 		case KeyEvent.VK_CONTROL:
 			fire();
 			break;	//少写break的话容易造成穿透；
@@ -204,6 +207,15 @@ public class Tank {
 		int x = this.x + Tank.WIDTH/2 - Missile.WIDTH/2;
 		int y = this.y + Tank.HEIGHT/2 - Missile.HEIGHT/2;
 		Missile s = new Missile(x,y,isGood(),ptDir,tc);
+		tc.msList.add(s);
+		return s;
+	} 
+	
+	public Missile fire(Direction dirs){
+		if(!live) return null;
+		int x = this.x + Tank.WIDTH/2 - Missile.WIDTH/2;
+		int y = this.y + Tank.HEIGHT/2 - Missile.HEIGHT/2;
+		Missile s = new Missile(x,y,isGood(),dirs,tc);
 		tc.msList.add(s);
 		return s;
 	} 
@@ -255,5 +267,12 @@ public class Tank {
 			}
 		}
 		return false;
+	}
+	
+	private void superFire(){
+		Direction[] dirs = Direction.values();
+		for(int i=0; i<8; i++){
+			tc.msList.add(fire(dirs[i]));
+		}
 	}
 }

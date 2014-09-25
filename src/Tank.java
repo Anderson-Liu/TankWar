@@ -165,6 +165,12 @@ public class Tank {
 	public void keyPress(KeyEvent e) {
 		int key = e.getKeyCode();
 		switch (key){
+		case KeyEvent.VK_R:
+			if(!this.live){
+				this.live = true;
+				this.life = 100;
+			}
+			break;
 		case KeyEvent.VK_LEFT :
 			bL = true;
 			break;
@@ -185,8 +191,10 @@ public class Tank {
 		int key = e.getKeyCode();
 		switch (key){
 		case KeyEvent.VK_A:
+			if(this.live){
 			superFire();
 			break;
+			}
 		case KeyEvent.VK_CONTROL:
 			fire();
 			break;	//少写break的话容易造成穿透；

@@ -3,6 +3,12 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author ºê´ï
+ *
+ */
+
 public class TankClient extends Frame{
 	Tank myTank = new Tank(500,500,true,Tank.Direction.STOP,this);
 	Wall w1 = new Wall(220, 150, 10, 250, this);
@@ -28,7 +34,7 @@ public class TankClient extends Frame{
 		this.setVisible(true);
 		this.setResizable(false);
 		this.setTitle("TankWar");
-		this.setBackground(Color.GREEN);
+		this.setBackground(Color.WHITE);
 		new Thread(new WindowThread(this)).start();
 		new Thread(new KeyThread(this)).start();
 		new Thread(new PaintThread()).start();
@@ -85,13 +91,6 @@ public class TankClient extends Frame{
 			}
 			
 		}
-		
-		if(!myTank.isLive()){
-			tankTime --;
-			if(tankTime >= 0){
-				myTank.setLive(false);
-			}
-		}
 	}
 	
 	private class KeyMonitor extends KeyAdapter{
@@ -129,12 +128,14 @@ public class TankClient extends Frame{
 		}
 		Graphics gOffScreen =  offScreenImage.getGraphics();
 		Color c = gOffScreen.getColor();
-		gOffScreen.setColor(Color.GREEN);
+		gOffScreen.setColor(Color.WHITE);
 		gOffScreen.fillRect(0, 0, Game_wigth, Game_height);
 		gOffScreen.setColor(c);
 		paint(gOffScreen);
 		g.drawImage(offScreenImage, 0, 0, null);
 	}
+	
+	
 	
 	private class KeyThread implements Runnable{
 		TankClient tc_1 =  new TankClient();

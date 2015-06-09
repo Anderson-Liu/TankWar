@@ -108,8 +108,10 @@ public class Tank {
     }
 
     public void move() {
+
         this.oldX = x;
         this.oldY = y;
+
         switch (dir) {
             case L:
                 x -= XSPEED;
@@ -143,17 +145,19 @@ public class Tank {
                 break;
         }
 
+        if(this.dir != Direction.STOP) {
+            this.ptDir = this.dir;
+        }
+
         if (x < 0) x = 0;    //左不出界
-        //if(x < 30) x = 30;
         if (y < 30) y = 30;  //上不出界
-        //if(y < 0) y = 0;
         if (x + Tank.WIDTH > TankClient.Game_wigth) x = TankClient.Game_wigth - Tank.WIDTH;
         if (y + Tank.HEIGHT > TankClient.Game_height) y = TankClient.Game_height - Tank.HEIGHT;
 
         //tcDir(); 注释掉后 敌方坦克能够动起来了
         //ms.move();
 
-        if (!isGood()) {
+        if (!good) {
             Direction[] dirs = Direction.values();
             if (step == 0) {
                 step = r.nextInt(12) + 3;
@@ -164,9 +168,7 @@ public class Tank {
                 }
             }
             step--;
-            if (r.nextInt(40) > 38) {
-                this.fire();
-            }
+            // if (r.nextInt(40) > 38)  this.fire();
         }
     }
 
@@ -180,14 +182,13 @@ public class Tank {
         else if (!bL && !bU && !bR && bD) dir = Direction.D;
         else if (bL && !bU && !bR && bD) dir = Direction.LD;
         else if (!bL && !bU && !bR && !bD) dir = Direction.STOP;
-        if (dir != Direction.STOP) {
-            ptDir = dir;
-        }
+        // if (dir != Direction.STOP) ptDir = dir;
+
 //move();
 
     }
 
-    public void keyPress(KeyEvent e) {
+    public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         switch (key) {
             case KeyEvent.VK_R:
@@ -209,7 +210,7 @@ public class Tank {
                 bD = true;
                 break;
         }
-        tcDir();    //修改处，修改后，敌方坦克到达底部后，我方坦克也不会动弹不得；
+        tcDir();                    //修改处，修改后，敌方坦克到达底部后，我方坦克也不会动弹不得；
     }
 
     public void keyReleased(KeyEvent e) {
@@ -222,7 +223,7 @@ public class Tank {
                 }
             case KeyEvent.VK_CONTROL:
                 fire();
-                break;    //少写break的话容易造成穿透；
+                break;                  //少写break的话容易造成穿透；
             case KeyEvent.VK_LEFT:
                 bL = false;
                 break;
@@ -236,7 +237,7 @@ public class Tank {
                 bD = false;
                 break;
         }
-//tcDir();
+        tcDir();              
     }
 
     public Missile fire() {

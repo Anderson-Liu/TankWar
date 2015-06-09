@@ -138,7 +138,7 @@ public class TankClient extends Frame {
 
         @Override
         public void keyPressed(KeyEvent e) {
-            myTank.keyPress(e);
+            myTank.keyPressed(e);
         }
 
         @Override

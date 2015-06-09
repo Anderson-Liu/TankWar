@@ -3,11 +3,11 @@ import java.awt.*;
 
 public class Explode {
 	int x,y;
-	private boolean live = true;
-	private TankClient tc;
-	
+	// The diameter of explode
 	int[] diameter = {4, 7, 12, 18, 26, 32, 49, 52, 47, 30, 14, 6};
 	int step = 0;
+	private boolean live = true;
+	private TankClient tc;
 	
 	public Explode(int x, int y, TankClient tc){
 		this.x = x;
@@ -19,9 +19,9 @@ public class Explode {
 	public void draw(Graphics g){
 		if(!live) return;
 		if(step == diameter.length){
-		live = false;
-		step = 0;
-		return;
+			live = false;
+			step = 0;
+			return;
 		}
 		
 		Color c = g.getColor();

@@ -7,27 +7,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 
- * @author ºê´ï
+ *
+ * @author Anderson
  *
  */
 
 public class TankClient extends Frame{
-	Tank myTank = new Tank(500,500,true,Tank.Direction.STOP,this);
-	Wall w1 = new Wall(220, 150, 10, 250, this);
-	Wall w2 = new Wall(400, 200, 220, 10, this);
-	Blood b = new Blood();
+	public final static int Game_wigth = 800;
+	public final static int Game_height = 600;
 	//Tank enemyTank = new Tank(80,110,false,this);
 	private static int time = 3;
 	private static int tankTime = 3;
-	
+	Tank myTank = new Tank(500, 500, true, Tank.Direction.STOP, this);
+	Wall w1 = new Wall(220, 150, 10, 250, this);
+	Wall w2 = new Wall(400, 200, 220, 10, this);
+	Blood b = new Blood();
 	Image offScreenImage = null;
-	public final static int Game_wigth = 800;
-	public final static int Game_height = 600;
 	List<Missile> msList = new ArrayList<>();
 	List<Explode> explodes = new ArrayList<>();
 	List<Tank> tanks = new ArrayList<>();
-	
+
+	public static void main(String[] args) {
+		TankClient tc = new TankClient();
+		tc.launchFrame();
+	}
+
+	// initial launch the main frame
 	public void launchFrame(){
 		for(int i=0; i<10; i++){
 			tanks.add(new Tank(50 + 40*(i+1), 90, false,Tank.Direction.D,this));
@@ -59,7 +64,7 @@ public class TankClient extends Frame{
 			b.draw(g);
 		}
 		//enemyTank.draw(g);
-		
+
 		for(int i=0; i<msList.size(); i++){
 			Missile m = msList.get(i);
 			if(!m.isLive())	msList.remove(m);
@@ -75,7 +80,7 @@ public class TankClient extends Frame{
 			//else e.draw(g);
 			e.draw(g);
 		}
-		
+
 		for(int i=0; i<tanks.size(); i++){
 			Tank t = tanks.get(i);
 			t.draw(g);
@@ -84,7 +89,7 @@ public class TankClient extends Frame{
 			t.hitEach(tanks);
 			//t.hitEach(t1);
 		}
-		
+
 		if(tanks.size() <= 0){
 			if(time < 5){
 				time ++;
@@ -92,11 +97,24 @@ public class TankClient extends Frame{
 					tanks.add(new Tank(50 + 40*(i+1), 90, false,Tank.Direction.D,this));
 				}
 			}
-			
+
 		}
 	}
-	
-	private class KeyMonitor extends KeyAdapter{
+
+	public void update(Graphics g) {
+		if (offScreenImage == null) {
+			offScreenImage = this.createImage(Game_wigth, Game_height);
+		}
+		Graphics gOffScreen = offScreenImage.getGraphics();
+		Color c = gOffScreen.getColor();
+		gOffScreen.setColor(Color.WHITE);
+		gOffScreen.fillRect(0, 0, Game_wigth, Game_height);
+		gOffScreen.setColor(c);
+		paint(gOffScreen);
+		g.drawImage(offScreenImage, 0, 0, null);
+	}
+
+	private class KeyMonitor extends KeyAdapter {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -107,14 +125,14 @@ public class TankClient extends Frame{
 		public void keyReleased(KeyEvent e) {
 			myTank.keyReleased(e);
 		}
-		
+
 	}
-	
-	private class PaintThread implements Runnable{
+
+	private class PaintThread implements Runnable {
 
 		@Override
 		public void run() {
-			while(true){
+			while (true) {
 				try {
 					Thread.sleep(40);
 					repaint();
@@ -124,22 +142,7 @@ public class TankClient extends Frame{
 			}
 		}
 	}
-	
-	public void update(Graphics g){
-		if(offScreenImage == null){
-			offScreenImage = this.createImage(Game_wigth, Game_height);
-		}
-		Graphics gOffScreen =  offScreenImage.getGraphics();
-		Color c = gOffScreen.getColor();
-		gOffScreen.setColor(Color.WHITE);
-		gOffScreen.fillRect(0, 0, Game_wigth, Game_height);
-		gOffScreen.setColor(c);
-		paint(gOffScreen);
-		g.drawImage(offScreenImage, 0, 0, null);
-	}
-	
-	
-	
+
 	private class KeyThread implements Runnable{
 		TankClient tc_1 =  new TankClient();
 		public KeyThread(TankClient tc_1){
@@ -150,7 +153,7 @@ public class TankClient extends Frame{
 			tc_1.addKeyListener(new KeyMonitor());
 		}
 	}
-		
+
 	private class WindowThread implements Runnable{
 		TankClient tc_1 =  new TankClient();
 		public WindowThread(TankClient tc_1){
@@ -165,11 +168,6 @@ public class TankClient extends Frame{
 				}
 			});
 		}
-	}
-	
-	public static void main(String[] args) {
-		TankClient tc = new TankClient();
-		tc.launchFrame();
 	}
 
 }

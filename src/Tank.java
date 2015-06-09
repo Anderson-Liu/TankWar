@@ -4,27 +4,25 @@ import java.util.Random;
 
 
 public class Tank {
-	
-	public static final int XSPEED = 5;
-	public static final int YSPEED = 5;
+	public static final int XSPEED = 8;
+	public static final int YSPEED = 8;
 	public static final int WIDTH = 30;
 	public static final int HEIGHT = 30;
+	private static Random r = new Random();
+	;
 	int x, y;
-	private int oldX,oldY;
-	private boolean bL=false,bU=false,bR=false,bD=false;
-	enum Direction {L, LU, U, RU, R, RD, D, LD, STOP};
-	private Direction dir = Direction.STOP;
-	private Direction ptDir = Direction.D;
 	TankClient tc = null;
+	private int oldX, oldY;
+	private int life = 100;
+	private int step = r.nextInt(12) + 3;
 	private boolean good;
 	private boolean live = true;
-	private static Random r = new Random();
-	
-	private int step = r.nextInt(12) + 3;;
-	private int life = 100;
-	
+	private boolean bL = false, bU = false, bR = false, bD = false;
+	private Direction dir = Direction.STOP;
+	;
+	private Direction ptDir = Direction.D;
 	private BloodBar bb = new BloodBar();
-	
+
 	public Tank(int x,int y,boolean good){
 		this.x = x;
 		this.y = y;
@@ -50,10 +48,10 @@ public class Tank {
 			g.setColor(Color.RED);
 		else
 			g.setColor(Color.BLUE);
-		
+
 		g.fillOval(x, y, WIDTH, HEIGHT);
 		g.setColor(c);
-		
+
 		switch(ptDir){
 		case L :
 			g.drawLine(x + Tank.WIDTH/2, y + Tank.HEIGHT/2, x, y + Tank.HEIGHT/2);
@@ -78,7 +76,7 @@ public class Tank {
 			break;
 		case LD :
 			g.drawLine(x + Tank.WIDTH/2, y + Tank.HEIGHT/2, x, y + Tank.HEIGHT);
-			break;	
+			break;
 		}
 		move();
 	}
@@ -116,19 +114,19 @@ public class Tank {
 			y += YSPEED;
 			break;
 		case STOP :
-			break;		
+			break;
 		}
-		
+
 		if(x < 0) x = 0;    //左不出界
-		//if(x < 30) x = 30; 
+		//if(x < 30) x = 30;
 		if(y < 30) y = 30;  //上不出界
 		//if(y < 0) y = 0;
 		if(x + Tank.WIDTH > TankClient.Game_wigth) x = TankClient.Game_wigth - Tank.WIDTH;
 		if(y + Tank.HEIGHT > TankClient.Game_height) y = TankClient.Game_height - Tank.HEIGHT;
-		
+
 		//tcDir(); 注释掉后 敌方坦克能够动起来了
 		//ms.move();
-		
+
 		if(!isGood()){
 			Direction[] dirs = Direction.values();
 			if(step == 0){
@@ -137,7 +135,7 @@ public class Tank {
 				dir = dirs[rn];
 				if (dir != Direction.STOP){
 					ptDir = dir;
-				} 
+				}
 			}
 			step --;
 			if(r.nextInt(40) > 38){
@@ -147,18 +145,18 @@ public class Tank {
 	}
 	
 	public void tcDir(){
-		if(bL && !bU && !bR && !bD) dir = Direction.L; 
-		else if(bL && bU && !bR && !bD) dir = Direction.LU; 
-		else if(!bL && bU && !bR && !bD) dir = Direction.U; 
-		else if(!bL && bU && bR && !bD) dir = Direction.RU; 
-		else if(!bL && !bU && bR && !bD) dir = Direction.R; 
-		else if(!bL && !bU && bR && bD) dir = Direction.RD; 
-		else if(!bL && !bU && !bR && bD) dir = Direction.D; 
-		else if(bL && !bU && !bR && bD) dir = Direction.LD; 
-		else if(!bL && !bU && !bR && !bD) dir = Direction.STOP; 
+		if (bL && !bU && !bR && !bD) dir = Direction.L;
+		else if (bL && bU && !bR && !bD) dir = Direction.LU;
+		else if (!bL && bU && !bR && !bD) dir = Direction.U;
+		else if (!bL && bU && bR && !bD) dir = Direction.RU;
+		else if (!bL && !bU && bR && !bD) dir = Direction.R;
+		else if (!bL && !bU && bR && bD) dir = Direction.RD;
+		else if (!bL && !bU && !bR && bD) dir = Direction.D;
+		else if (bL && !bU && !bR && bD) dir = Direction.LD;
+		else if (!bL && !bU && !bR && !bD) dir = Direction.STOP;
 		if (dir != Direction.STOP){
 			ptDir = dir;
-		} 
+		}
 //move();
 
 	}
@@ -183,7 +181,7 @@ public class Tank {
 			break;
 		case KeyEvent.VK_DOWN :
 			bD = true;
-			break;	
+			break;
 		}
 		tcDir();	//修改处，修改后，敌方坦克到达底部后，我方坦克也不会动弹不得；
 	}
@@ -210,7 +208,7 @@ public class Tank {
 			break;
 		case KeyEvent.VK_DOWN :
 			bD = false;
-			break;	
+			break;
 		}
 //tcDir();
 	}
@@ -222,8 +220,8 @@ public class Tank {
 		Missile s = new Missile(x,y,isGood(),ptDir,tc);
 		tc.msList.add(s);
 		return s;
-	} 
-	
+	}
+
 	public Missile fire(Direction dirs){
 		if(!live) return null;
 		int x = this.x + Tank.WIDTH/2 - Missile.WIDTH/2;
@@ -231,8 +229,8 @@ public class Tank {
 		Missile s = new Missile(x,y,isGood(),dirs,tc);
 		tc.msList.add(s);
 		return s;
-	} 
-
+	}
+	
 	public Rectangle getRect(){
 		return new Rectangle(x,y,WIDTH,HEIGHT);
 	}
@@ -252,7 +250,7 @@ public class Tank {
 	public void setGood(boolean good) {
 		this.good = good;
 	}
-	
+
 	public void stay(){
 		this.x = oldX;
 		this.y = oldY;
@@ -296,6 +294,17 @@ public class Tank {
 	public void setLife(int life) {
 		this.life = life;
 	}
+
+	public boolean eat(Blood b) {
+		if (this.live && b.isLive() && this.getRect().intersects(b.getRect())) {
+			life = 100;
+			b.setLive(false);
+			return true;
+		}
+		return false;
+	}
+
+	enum Direction {L, LU, U, RU, R, RD, D, LD, STOP}
 	
 	public class BloodBar{
 		public void draw(Graphics g){
@@ -306,14 +315,5 @@ public class Tank {
 			g.fillRect(x, y-20, w, 10);
 			g.setColor(c);
 		}
-	}
-	
-	public boolean eat(Blood b){
-		if(this.live && b.isLive() && this.getRect().intersects(b.getRect())){
-			life = 100;
-			b.setLive(false);
-			return true;
-		}
-		return false;
 	}
 }

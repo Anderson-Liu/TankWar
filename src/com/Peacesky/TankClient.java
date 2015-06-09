@@ -20,7 +20,7 @@ public class TankClient extends Frame {
     public final static int Game_height = 600;
     private static int time = 1;
     Tank myTank = new Tank(500, 500, true, Direction.STOP, this);
-    Wall w1 = new Wall(220, 150, 10, 250, this);
+    Wall w1 = new Wall(220, 200, 10, 250, this);
     Wall w2 = new Wall(400, 200, 220, 10, this);
     Blood b = new Blood();
     Image offScreenImage = null;

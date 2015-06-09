@@ -2,6 +2,8 @@ package com.Peacesky;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 
@@ -25,6 +27,36 @@ public class Tank {
     private Direction ptDir = Direction.D;
     private BloodBar bb = new BloodBar();
 
+    private static Toolkit tk = Toolkit.getDefaultToolkit();
+    private static Image[] tankImage = null;
+    private static Map<String, Image> imgs = new HashMap<>();
+
+    // 静态代码区
+    // 适合执行变量初始化
+    static {
+        tankImage = new Image[] {
+                tk.getImage(Explode.class.getClassLoader().getResource("image/tankL.gif")),
+                tk.getImage(Explode.class.getClassLoader().getResource("image/tankLU.gif")),
+                tk.getImage(Explode.class.getClassLoader().getResource("image/tankU.gif")),
+                tk.getImage(Explode.class.getClassLoader().getResource("image/tankRU.gif")),
+                tk.getImage(Explode.class.getClassLoader().getResource("image/tankR.gif")),
+                tk.getImage(Explode.class.getClassLoader().getResource("image/tankRD.gif")),
+                tk.getImage(Explode.class.getClassLoader().getResource("image/tankD.gif")),
+                tk.getImage(Explode.class.getClassLoader().getResource("image/tankLD.gif"))
+        };
+
+        // static 代码区更灵活 由static代码区才能允许添加以下这段代码
+        // 形成键值对 使用命名代替原来的下标标示  更易于维护
+        imgs.put("L", tankImage[0]);
+        imgs.put("LU", tankImage[1]);
+        imgs.put("U", tankImage[2]);
+        imgs.put("RU", tankImage[3]);
+        imgs.put("R", tankImage[4]);
+        imgs.put("RD", tankImage[5]);
+        imgs.put("D", tankImage[6]);
+        imgs.put("LD", tankImage[7]);
+    }
+
     public Tank(int x, int y, boolean good) {
         this.x = x;
         this.y = y;
@@ -45,39 +77,31 @@ public class Tank {
             }
             return;
         }
-        Color c = g.getColor();
-        if (isGood())
-            g.setColor(Color.RED);
-        else
-            g.setColor(Color.GRAY);
-
-        g.fillOval(x, y, WIDTH, HEIGHT);
-        g.setColor(c);
 
         switch (ptDir) {
             case L:
-                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x, y + Tank.HEIGHT / 2);
+                g.drawImage(imgs.get("L"), x, y, null);
                 break;
             case LU:
-                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x, y);
+                g.drawImage(imgs.get("LU"), x, y, null);
                 break;
             case U:
-                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + Tank.WIDTH / 2, y);
+                g.drawImage(imgs.get("U"), x, y, null);
                 break;
             case RU:
-                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + Tank.WIDTH, y);
+                g.drawImage(imgs.get("RU"), x, y, null);
                 break;
             case R:
-                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + Tank.WIDTH, y + Tank.HEIGHT / 2);
+                g.drawImage(imgs.get("R"), x, y, null);
                 break;
             case RD:
-                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + Tank.WIDTH, y + Tank.HEIGHT);
+                g.drawImage(imgs.get("RD"), x, y, null);
                 break;
             case D:
-                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + Tank.WIDTH / 2, y + Tank.HEIGHT);
+                g.drawImage(imgs.get("D"), x, y, null);
                 break;
             case LD:
-                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x, y + Tank.HEIGHT);
+                g.drawImage(imgs.get("LD"), x, y, null);
                 break;
         }
         move();
@@ -311,7 +335,7 @@ public class Tank {
     public class BloodBar {
         public void draw(Graphics g) {
             Color c = g.getColor();
-            g.setColor(Color.RED);
+            g.setColor(Color.GRAY);
             g.drawRect(x, y - 20, WIDTH, 10);
             int w = WIDTH * life / 100;
             g.fillRect(x, y - 20, w, 10);

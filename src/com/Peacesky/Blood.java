@@ -29,7 +29,7 @@ public class Blood {
         if (!live) return;
 
         Color c = g.getColor();
-        g.setColor(Color.MAGENTA);
+        g.setColor(Color.GRAY);
         g.fillRect(x, y, w, h);
         g.setColor(c);
 

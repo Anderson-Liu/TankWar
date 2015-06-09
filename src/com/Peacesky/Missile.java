@@ -6,8 +6,8 @@ import java.util.List;
 public class Missile {
     public static final int WIDTH = 10;
     public static final int HEIGHT = 10;
-    private static final int XSPEED = 10;
-    private static final int YSPEED = 10;
+    private static final int XSPEED = 14;
+    private static final int YSPEED = 14;
     public boolean live = true;
     int x, y;
     Direction dir;
@@ -30,7 +30,7 @@ public class Missile {
         if (!live) return;
         Color c = g.getColor();
         if (good)
-            g.setColor(Color.MAGENTA);
+            g.setColor(Color.lightGray);
         else
             g.setColor(Color.GRAY);
 

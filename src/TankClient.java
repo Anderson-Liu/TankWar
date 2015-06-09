@@ -26,7 +26,7 @@ public class TankClient extends Frame{
 	Image offScreenImage = null;
 	List<Missile> msList = new ArrayList<>();
 	List<Explode> explodes = new ArrayList<>();
-	List<Tank> tanks = new ArrayList<Tank>();
+	List<Tank> tanks = new ArrayList<>();
 
 	public static void main(String[] args) {
 		TankClient tc = new TankClient();
@@ -99,13 +99,22 @@ public class TankClient extends Frame{
 				time ++;
 				// 一次new太多个出来会导致Bug
 				// 因为横向画不下，所以导致了画在主界面外面
-				for (int i = 0; i < time * 3; i++) {
-					if (40 * (i + 1) > this.Game_wigth) {
+				for (int i = 0; i < time * 4; i++) {
+					if (40 * (i + 1) > Game_wigth) {
 						JOptionPane.showMessageDialog(this, "The count of Tank is too many to show!\n" +
 								"Please reduce the Tank's amount!");
 						exit(0);
 					}
 					tanks.add(new Tank(50 + 40*(i+1), 90, false,Tank.Direction.D,this));
+				}
+			} else {
+				for (int i = 0; i < 12; i++) {
+					if (40 * (i + 1) > Game_wigth) {
+						JOptionPane.showMessageDialog(this, "The count of Tank is too many to show!\n" +
+								"Please reduce the Tank's amount!");
+						exit(0);
+					}
+					tanks.add(new Tank(50 + 40 * (i + 1), 500, false, Tank.Direction.D, this));
 				}
 			}
 

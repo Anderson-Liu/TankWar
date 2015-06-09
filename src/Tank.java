@@ -1,7 +1,6 @@
 import java.awt.*;
-import java.awt.List;
 import java.awt.event.KeyEvent;
-import java.util.*;
+import java.util.Random;
 
 
 public class Tank {
@@ -33,13 +32,13 @@ public class Tank {
 	}
 	
 	public Tank(int x,int y,boolean good,Direction dir,TankClient tc){
-		this(x,y,good);
+		this(x, y, good);
 		this.dir = dir;
 		this.tc = tc;
 	}
 	
 	public void draw(Graphics g){
-		if(good) bb.draw(g);
+		if (good && this.live) bb.draw(g);
 		if(!live){
 			if(!isGood()){
 				tc.tanks.remove(this);
@@ -47,8 +46,10 @@ public class Tank {
 			return;
 		}
 		Color c = g.getColor();
-		if(isGood())	g.setColor(Color.RED);
-		else	g.setColor(Color.BLUE);
+		if (isGood())
+			g.setColor(Color.RED);
+		else
+			g.setColor(Color.BLUE);
 		
 		g.fillOval(x, y, WIDTH, HEIGHT);
 		g.setColor(c);

@@ -1,5 +1,8 @@
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +24,9 @@ public class TankClient extends Frame{
 	Image offScreenImage = null;
 	public final static int Game_wigth = 800;
 	public final static int Game_height = 600;
-	List<Missile> msList = new ArrayList<Missile>(); 
-	List<Explode> explodes = new ArrayList<Explode>();
-	List<Tank> tanks = new ArrayList<Tank>();
+	List<Missile> msList = new ArrayList<>();
+	List<Explode> explodes = new ArrayList<>();
+	List<Tank> tanks = new ArrayList<>();
 	
 	public void launchFrame(){
 		for(int i=0; i<10; i++){
@@ -113,7 +116,7 @@ public class TankClient extends Frame{
 		public void run() {
 			while(true){
 				try {
-					Thread.sleep(30);
+					Thread.sleep(40);
 					repaint();
 				} catch (InterruptedException e) {
 					e.printStackTrace();

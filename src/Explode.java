@@ -4,10 +4,16 @@ import java.awt.*;
 public class Explode {
 	int x,y;
 	// The diameter of explode
-	int[] diameter = {4, 7, 12, 18, 26, 32, 49, 52, 47, 30, 14, 6};
+	// int[] diameter = {4, 7, 12, 18, 26, 32, 49, 52, 47, 30, 14, 6};	// ¸ÄÎªÍ¼Æ¬
 	int step = 0;
 	private boolean live = true;
 	private TankClient tc;
+
+	private static Toolkit tk = Toolkit.getDefaultToolkit();
+
+	private static Image[] imgs ={
+		tk.getImage("")
+	};
 	
 	public Explode(int x, int y, TankClient tc){
 		this.x = x;

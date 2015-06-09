@@ -157,6 +157,7 @@ public class Tank {
         //tcDir(); 注释掉后 敌方坦克能够动起来了
         //ms.move();
 
+        // 控制敌方坦克攻击
         if (!good) {
             Direction[] dirs = Direction.values();
             if (step == 0) {
@@ -168,7 +169,7 @@ public class Tank {
                 }
             }
             step--;
-            // if (r.nextInt(40) > 38)  this.fire();
+            if (r.nextInt(40) > 35)  this.fire();       // 当产生40内的随机数大于35时 开火
         }
     }
 
@@ -237,7 +238,7 @@ public class Tank {
                 bD = false;
                 break;
         }
-        tcDir();              
+        tcDir();
     }
 
     public Missile fire() {
@@ -259,7 +260,7 @@ public class Tank {
     }
 
     public Rectangle getRect() {
-        return new Rectangle(x, y, WIDTH, HEIGHT);
+        return new Rectangle(x, y, tankImage[0].getWidth(null), tankImage[0].getHeight(null));
     }
 
     public boolean isLive() {

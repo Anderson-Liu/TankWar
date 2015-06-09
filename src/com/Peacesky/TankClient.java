@@ -19,6 +19,7 @@ public class TankClient extends Frame {
     public final static int Game_wigth = 800;
     public final static int Game_height = 600;
     private static int time = 1;
+    private static int tank_Gap = 60;        // 坦克间的距离
     Tank myTank = new Tank(500, 500, true, Direction.STOP, this);
     Wall w1 = new Wall(220, 200, 10, 250, this);
     Wall w2 = new Wall(400, 200, 220, 10, this);
@@ -36,7 +37,7 @@ public class TankClient extends Frame {
     // initial launch the main frame
     public void launchFrame() {
         for (int i = 0; i < 10; i++) {
-            tanks.add(new Tank(50 + 40 * (i + 1), 90, false, Direction.D, this));
+            tanks.add(new Tank(50 + tank_Gap* (i + 1), 90, false, Direction.D, this));
         }
         this.setLocation(400, 300);
         this.setSize(Game_wigth, Game_height);
@@ -99,22 +100,22 @@ public class TankClient extends Frame {
                 time++;
                 // 一次new太多个出来会导致Bug
                 // 因为横向画不下，所以导致了画在主界面外面
-                for (int i = 0; i < time * 4; i++) {
-                    if (40 * (i + 1) > Game_wigth) {
+                for (int i = 0; i < time * 3; i++) {
+                    if (tank_Gap * (i + 1) > Game_wigth) {
                         JOptionPane.showMessageDialog(this, "The count of com.Peacesky.Tank is too many to show!\n" +
                                 "Please reduce the com.Peacesky.Tank's amount!");
                         exit(0);
                     }
-                    tanks.add(new Tank(50 + 40 * (i + 1), 90, false, Direction.D, this));
+                    tanks.add(new Tank(50 + tank_Gap * (i + 1), 90, false, Direction.D, this));
                 }
             } else {
-                for (int i = 0; i < 12; i++) {
-                    if (40 * (i + 1) > Game_wigth) {
+                for (int i = 0; i < 10; i++) {
+                    if (tank_Gap * (i + 1) > Game_wigth) {
                         JOptionPane.showMessageDialog(this, "The count of com.Peacesky.Tank is too many to show!\n" +
                                 "Please reduce the com.Peacesky.Tank's amount!");
                         exit(0);
                     }
-                    tanks.add(new Tank(50 + 40 * (i + 1), 500, false, Direction.D, this));
+                    tanks.add(new Tank(50 + tank_Gap* (i + 1), 500, false, Direction.D, this));
                 }
             }
 

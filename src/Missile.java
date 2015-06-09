@@ -2,14 +2,14 @@ import java.awt.*;
 import java.util.List;
 
 public class Missile {
+	public static final int WIDTH = 10;
+	public static final int HEIGHT = 10;
+	private static final int XSPEED = 10;
+	private static final int YSPEED = 10;
+	public boolean live = true;
 	int x,y;
 	Tank.Direction dir;
 	private TankClient tc;
-	private static final int XSPEED = 10;
-	private static final int YSPEED = 10;
-	public static final int WIDTH = 10;
-	public static final int HEIGHT = 10;
-	public boolean live = true;
 	private boolean good;
 	
 	public Missile(int x, int y, Tank.Direction dir){
@@ -85,20 +85,21 @@ public class Missile {
 	}
 	
 	public boolean hitTank(Tank t){
-		if(this.live && this.getRect().intersects(t.getRect()) && t.isLive() && this.good != t.isGood()){
+		if (this.live && this.getRect().intersects(t.getRect())
+				&& t.isLive() && this.good != t.isGood()) {
 			if(t.isGood()){
 				t.setLife(t.getLife() - 20);
 				this.live = false;
 				if(t.getLife() == 0) {
 					t.setLive(false);
 					this.live = false;
-					Explode e = new Explode(x, y, tc);
+					Explode e = new Explode(x, y, tc);    // Show the explode
 					tc.explodes.add(e);
 				}
-			}else{
+			} else {
 				t.setLive(false);
 				this.live = false;
-				Explode e = new Explode(x, y, tc);
+				Explode e = new Explode(x, y, tc);        // Show the explode
 				tc.explodes.add(e);
 			}
 			return true;

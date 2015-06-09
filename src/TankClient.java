@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -5,6 +6,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.System.exit;
 
 /**
  *
@@ -15,9 +18,7 @@ import java.util.List;
 public class TankClient extends Frame{
 	public final static int Game_wigth = 800;
 	public final static int Game_height = 600;
-	//Tank enemyTank = new Tank(80,110,false,this);
-	private static int time = 3;
-	private static int tankTime = 3;
+	private static int time = 1;
 	Tank myTank = new Tank(500, 500, true, Tank.Direction.STOP, this);
 	Wall w1 = new Wall(220, 150, 10, 250, this);
 	Wall w2 = new Wall(400, 200, 220, 10, this);
@@ -25,7 +26,7 @@ public class TankClient extends Frame{
 	Image offScreenImage = null;
 	List<Missile> msList = new ArrayList<>();
 	List<Explode> explodes = new ArrayList<>();
-	List<Tank> tanks = new ArrayList<>();
+	List<Tank> tanks = new ArrayList<Tank>();
 
 	public static void main(String[] args) {
 		TankClient tc = new TankClient();
@@ -47,7 +48,7 @@ public class TankClient extends Frame{
 		new Thread(new KeyThread(this)).start();
 		new Thread(new PaintThread()).start();
 	}
-	
+
 	@Override
 	public void paint(Graphics g) {
 		g.drawString("missiles count: " + msList.size(), 40, 60);
@@ -63,37 +64,47 @@ public class TankClient extends Frame{
 		if(b.isLive()){
 			b.draw(g);
 		}
-		//enemyTank.draw(g);
 
+		// While Missile done it's work, remove.
 		for(int i=0; i<msList.size(); i++){
 			Missile m = msList.get(i);
-			if(!m.isLive())	msList.remove(m);
+			if (!m.isLive())
+				msList.remove(m);
 			else m.draw(g);
 			m.hitTanks(tanks);
 			m.hitTank(myTank);
 			m.hitWall(w1);
 			m.hitWall(w2);
 		}
+
+		// While explodes done, remove it.
 		for(int i=0; i<explodes.size(); i++){
 			Explode e = explodes.get(i);
-			if(!e.isLive())	explodes.remove(e);
-			//else e.draw(g);
+			if (!e.isLive())
+				explodes.remove(e);
 			e.draw(g);
 		}
 
 		for(int i=0; i<tanks.size(); i++){
 			Tank t = tanks.get(i);
 			t.draw(g);
-			t.hitWall(w1);
-			t.hitWall(w2);
-			t.hitEach(tanks);
+			t.hitWall(w1);                // Whether the tank hit the wall,
+			t.hitWall(w2);                // if true, let it stay at the place
+			t.hitEach(tanks);            // Whether the tank hit each others.
 			//t.hitEach(t1);
 		}
 
 		if(tanks.size() <= 0){
 			if(time < 5){
 				time ++;
-				for(int i=0; i<time*5; i++){
+				// 一次new太多个出来会导致Bug
+				// 因为横向画不下，所以导致了画在主界面外面
+				for (int i = 0; i < time * 3; i++) {
+					if (40 * (i + 1) > this.Game_wigth) {
+						JOptionPane.showMessageDialog(this, "The count of Tank is too many to show!\n" +
+								"Please reduce the Tank's amount!");
+						exit(0);
+					}
 					tanks.add(new Tank(50 + 40*(i+1), 90, false,Tank.Direction.D,this));
 				}
 			}
@@ -164,7 +175,7 @@ public class TankClient extends Frame{
 			tc_1.addWindowListener(new WindowAdapter(){
 				@Override
 				public void windowClosing(WindowEvent arg0) {
-					System.exit(0);
+					exit(0);
 				}
 			});
 		}

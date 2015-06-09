@@ -47,7 +47,7 @@ public class Tank {
 		if (isGood())
 			g.setColor(Color.RED);
 		else
-			g.setColor(Color.BLUE);
+			g.setColor(Color.GRAY);
 
 		g.fillOval(x, y, WIDTH, HEIGHT);
 		g.setColor(c);
@@ -304,7 +304,7 @@ public class Tank {
 		return false;
 	}
 
-	enum Direction {L, LU, U, RU, R, RD, D, LD, STOP}
+	// enum Direction {L, LU, U, RU, R, RD, D, LD, STOP}	∂¿¡¢≥…¿‡
 	
 	public class BloodBar{
 		public void draw(Graphics g){

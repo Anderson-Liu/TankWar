@@ -19,7 +19,7 @@ public class TankClient extends Frame {
     public final static int Game_wigth = 800;
     public final static int Game_height = 600;
     private static int time = 1;
-    private static int tank_Gap = 60;        // 坦克间的距离
+    private static int tank_Gap = 50;        // 坦克间的距离
     Tank myTank = new Tank(500, 500, true, Direction.STOP, this);
     Wall w1 = new Wall(220, 200, 10, 250, this);
     Wall w2 = new Wall(400, 200, 220, 10, this);
@@ -36,7 +36,11 @@ public class TankClient extends Frame {
 
     // initial launch the main frame
     public void launchFrame() {
-        for (int i = 0; i < 10; i++) {
+
+        int initTankCount;
+
+        initTankCount = Integer.parseInt(PropertyMngr.getProperty("initTankCount"));
+        for (int i = 0; i < initTankCount; i++) {
             tanks.add(new Tank(50 + tank_Gap* (i + 1), 90, false, Direction.D, this));
         }
         this.setLocation(400, 300);
@@ -44,7 +48,7 @@ public class TankClient extends Frame {
         this.setVisible(true);
         this.setResizable(false);
         this.setTitle("TankWar");
-        this.setBackground(Color.WHITE);
+        this.setBackground(Color.BLACK);
         new Thread(new WindowThread(this)).start();
         new Thread(new KeyThread(this)).start();
         new Thread(new PaintThread()).start();
@@ -96,7 +100,7 @@ public class TankClient extends Frame {
         }
 
         if (tanks.size() <= 0) {
-            if (time < 5) {
+            if (time < Integer.parseInt(PropertyMngr.getProperty("AppendTankCount"))) {
                 time++;
                 // 一次new太多个出来会导致Bug
                 // 因为横向画不下，所以导致了画在主界面外面
@@ -128,7 +132,7 @@ public class TankClient extends Frame {
         }
         Graphics gOffScreen = offScreenImage.getGraphics();
         Color c = gOffScreen.getColor();
-        gOffScreen.setColor(Color.WHITE);
+        gOffScreen.setColor(Color.DARK_GRAY);
         gOffScreen.fillRect(0, 0, Game_wigth, Game_height);
         gOffScreen.setColor(c);
         paint(gOffScreen);

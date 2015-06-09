@@ -10,12 +10,6 @@ public class Missile {
     public static final int HEIGHT = 10;
     private static final int XSPEED = 14;
     private static final int YSPEED = 14;
-    public boolean live = true;
-    int x, y;
-    Direction dir;
-    private TankClient tc;
-    private boolean good;
-
     private static Toolkit tk = Toolkit.getDefaultToolkit();
     private static Image[] missileImages = null;
     private static Map<String, Image> imgs = new HashMap<>();
@@ -30,11 +24,10 @@ public class Missile {
                 tk.getImage(Explode.class.getClassLoader().getResource("image/missileRU.gif")),
                 tk.getImage(Explode.class.getClassLoader().getResource("image/missileR.gif")),
                 tk.getImage(Explode.class.getClassLoader().getResource("image/missileRD.gif")),
+                tk.getImage(Explode.class.getClassLoader().getResource("image/missileD.gif")),
                 tk.getImage(Explode.class.getClassLoader().getResource("image/missileLD.gif"))
         };
 
-        // static 代码区更灵活 由static代码区才能允许添加以下这段代码
-        // 形成键值对 使用命名代替原来的下标标示  更易于维护
         imgs.put("L", missileImages[0]);
         imgs.put("LU", missileImages[1]);
         imgs.put("U", missileImages[2]);
@@ -44,6 +37,12 @@ public class Missile {
         imgs.put("D", missileImages[6]);
         imgs.put("LD", missileImages[7]);
     }
+
+    public boolean live = true;
+    int x, y;
+    Direction dir;
+    private TankClient tc;
+    private boolean good;
 
     public Missile(int x, int y, Direction dir) {
         this.x = x;
@@ -58,12 +57,7 @@ public class Missile {
     }
 
     public void draw(Graphics g) {
-
-        if (!live) {
-            tc.msList.remove(this);
-            return;
-        }
-
+        if (!live) return;
 
         switch (dir) {
             case L:
@@ -90,15 +84,12 @@ public class Missile {
             case LD:
                 g.drawImage(imgs.get("LD"), x, y, null);
                 break;
-            case STOP:
-                break;
         }
 
         move();
     }
 
-    private void move() {
-
+    public void move() {
         switch (dir) {
             case L:
                 x -= XSPEED;
@@ -128,8 +119,6 @@ public class Missile {
                 x -= XSPEED;
                 y += YSPEED;
                 break;
-            case STOP:
-                break;
         }
 
         if (x < 0 || x > TankClient.Game_wigth || y < 0 || y > TankClient.Game_height) {
@@ -137,7 +126,6 @@ public class Missile {
             tc.msList.remove(this);
         }
     }
-
 
     public boolean isLive() {
         return live;

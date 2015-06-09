@@ -1,46 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1fc7b024-017a-4baa-b159-e2a401215754" name="Default" comment="终于修复了一个Bug!!!!!通过在class根目录下添加image文件夹，总算可以正常读取到了！！！">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/Peacesky/Explode.java" />
-      <change type="DELETED" beforePath="D:\IdeaProjects\TankWar\src\Explode.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\Blood.java" afterPath="$PROJECT_DIR$/src/com/Peacesky/Blood.java" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\Direction.java" afterPath="$PROJECT_DIR$/src/com/Peacesky/Direction.java" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\Missile.java" afterPath="$PROJECT_DIR$/src/com/Peacesky/Missile.java" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\Tank.java" afterPath="$PROJECT_DIR$/src/com/Peacesky/Tank.java" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\TankClient.java" afterPath="$PROJECT_DIR$/src/com/Peacesky/TankClient.java" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\Wall.java" afterPath="$PROJECT_DIR$/src/com/Peacesky/Wall.java" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\0.gif" afterPath="$PROJECT_DIR$/src/Image/0.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\1.gif" afterPath="$PROJECT_DIR$/src/Image/1.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\10.gif" afterPath="$PROJECT_DIR$/src/Image/10.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\2.gif" afterPath="$PROJECT_DIR$/src/Image/2.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\3.gif" afterPath="$PROJECT_DIR$/src/Image/3.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\4.gif" afterPath="$PROJECT_DIR$/src/Image/4.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\5.gif" afterPath="$PROJECT_DIR$/src/Image/5.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\6.gif" afterPath="$PROJECT_DIR$/src/Image/6.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\7.gif" afterPath="$PROJECT_DIR$/src/Image/7.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\8.gif" afterPath="$PROJECT_DIR$/src/Image/8.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\9.gif" afterPath="$PROJECT_DIR$/src/Image/9.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\MissileU.gif" afterPath="$PROJECT_DIR$/src/Image/MissileU.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\missileD.gif" afterPath="$PROJECT_DIR$/src/Image/missileD.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\missileL.gif" afterPath="$PROJECT_DIR$/src/Image/missileL.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\missileLD.gif" afterPath="$PROJECT_DIR$/src/Image/missileLD.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\missileLU.gif" afterPath="$PROJECT_DIR$/src/Image/missileLU.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\missileR.gif" afterPath="$PROJECT_DIR$/src/Image/missileR.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\missileRD.gif" afterPath="$PROJECT_DIR$/src/Image/missileRD.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\missileRU.gif" afterPath="$PROJECT_DIR$/src/Image/missileRU.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\tankD.gif" afterPath="$PROJECT_DIR$/src/Image/tankD.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\tankL.gif" afterPath="$PROJECT_DIR$/src/Image/tankL.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\tankLD.gif" afterPath="$PROJECT_DIR$/src/Image/tankLD.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\tankLU.gif" afterPath="$PROJECT_DIR$/src/Image/tankLU.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\tankR.gif" afterPath="$PROJECT_DIR$/src/Image/tankR.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\tankRD.gif" afterPath="$PROJECT_DIR$/src/Image/tankRD.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\tankRU.gif" afterPath="$PROJECT_DIR$/src/Image/tankRU.gif" />
-      <change type="MOVED" beforePath="D:\IdeaProjects\TankWar\src\images\tankU.gif" afterPath="$PROJECT_DIR$/src/Image/tankU.gif" />
-    </list>
+    <list default="true" id="1fc7b024-017a-4baa-b159-e2a401215754" name="Default" comment="终于修复了一个Bug!!!!!通过在class根目录下添加image文件夹，总算可以正常读取到了！！！" />
     <ignored path="TankWar.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -782,7 +743,7 @@
       <workItem from="1433850183551" duration="63000" />
       <workItem from="1433850294420" duration="865000" />
       <workItem from="1433852507082" duration="642000" />
-      <workItem from="1433853619053" duration="3158000" />
+      <workItem from="1433853619053" duration="3282000" />
     </task>
     <task id="LOCAL-00001" summary="Fix something with code analysis before commit.">
       <created>1433828332479</created>
@@ -818,7 +779,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30037000" />
+    <option name="totallyTimeSpent" value="30161000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1fc7b024-017a-4baa-b159-e2a401215754" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TankWar.iml" />
-    </list>
+    <list default="true" id="1fc7b024-017a-4baa-b159-e2a401215754" name="Default" comment="" />
     <ignored path="TankWar.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -382,12 +380,12 @@
       <created>1433820755769</created>
       <option name="number" value="Default" />
       <updated>1433820755769</updated>
-      <workItem from="1433820765257" duration="620000" />
+      <workItem from="1433820765257" duration="910000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="620000" />
+    <option name="totallyTimeSpent" value="910000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />

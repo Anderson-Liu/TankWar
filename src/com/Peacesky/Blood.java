@@ -1,3 +1,5 @@
+package com.Peacesky;
+
 import java.awt.*;
 
 public class Blood {
@@ -24,7 +26,7 @@ public class Blood {
     }
 
     public void draw(Graphics g) {
-        if(!live) return;
+        if (!live) return;
 
         Color c = g.getColor();
         g.setColor(Color.MAGENTA);
@@ -35,8 +37,8 @@ public class Blood {
     }
 
     private void move() {
-        step ++;
-        if(step == pos.length){
+        step++;
+        if (step == pos.length) {
             step = 0;
         }
         x = pos[step][0];
@@ -44,7 +46,7 @@ public class Blood {
     }
 
     public Rectangle getRect() {
-        return new Rectangle(x, y, w , h);
+        return new Rectangle(x, y, w, h);
     }
 
     public boolean isLive() {
